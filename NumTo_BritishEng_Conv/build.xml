@@ -1,0 +1,73 @@
+<project name="NumTo_BritishEng_Conv" default="jar" basedir=".">
+    <description>
+        Integer to British English
+    </description>
+
+<property name="src.dir"     	value="src"/>
+<property name="lib.dir"     	value="lib"/>
+<property name="build.dir"   	value="build"/>
+<property name="classes.dir" 	value="${build.dir}/classes"/>
+<property name="jar.dir"     	value="${build.dir}/jar"/>
+<property name="test.dir"    	value="testReport"/>
+<property name="project.name"   value="NumTo_BritishEng_Conv"/>
+<property name="main-class"  	value="com.numtobr.test.TestNumToWords"/>
+<property name="TALK" 		    value="true" />
+
+<target name="clean">
+    <delete dir="${build.dir}"/>
+    <delete dir="${classes.dir}"/>
+    <delete dir="${jar.dir}"/>    
+</target>
+
+<target name="init" depends="clean">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${classes.dir}"/>
+    <mkdir dir="${jar.dir}"/>    
+</target>
+
+	
+<target name="compile" depends="init">
+    <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+</target>
+
+<target name="jar" depends="compile">
+    <jar destfile="${jar.dir}/${project.name}.jar" basedir="${classes.dir}">
+        <manifest>
+            <attribute name="Main-Class" value="${main-class}"/>
+        </manifest>
+    </jar>
+</target>
+
+<target name="test" depends="jar">
+ <delete dir="${test.dir}"/>
+ <mkdir dir="${test.dir}"/>
+ <junit fork="true"
+        haltonfailure="false"
+        haltonerror="false"
+        failureproperty="tests.failures"
+        errorproperty="tests.errors"
+        includeantruntime="true"
+        showoutput="true"
+        printsummary="true">
+     <classpath>
+     	
+         <pathelement location="${lib.dir}/junit-3.8.jar"/>
+         <pathelement location="${jar.dir}/${project.name}.jar"/>
+     	 
+     </classpath>
+
+ 	
+     <formatter type="xml"/>
+
+     <batchtest fork="yes" todir="${test.dir}">
+         <fileset dir="${src.dir}">
+             <include name="**/JUnit*.java"/>
+         </fileset>
+     </batchtest>
+ </junit>
+</target>
+
+<target name="run" depends="jar">
+    <java jar="${jar.dir}/${project.name}.jar" fork="true"/>
+</target>
+</project>
