@@ -10,20 +10,20 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 public class User {	
 	
 	@Id
-	@Column(name = "username", nullable = false, unique = true)
+	@Column(name = "USERNAME", nullable = false, unique = true)
 	private String username;
-	@Column(name = "password", nullable = false)
+	@Column(name = "PASSWORD", nullable = false)
 	@NotNull
 	private String password;
-	@Column(name = "enabled", nullable = false)
+	@Column(name = "ACTIVE", nullable = false)
     @NotNull
-    private Boolean enabled;
+    private Boolean active;
 	
-	@Column(name = "role", nullable = false)
+	@Column(name = "ROLE", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 	public String getUsername() {
@@ -38,12 +38,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Boolean getEnabled() {
-		return enabled;
-	}
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
 	public UserRole getRole() {
         return userRole;
     }
@@ -51,4 +45,18 @@ public class User {
     public void setRole(UserRole userRole) {
         this.userRole = userRole;
     }
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public UserRole getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
+	}
+    
+    
 }

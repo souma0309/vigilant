@@ -40,7 +40,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/superadmin**", method = RequestMethod.GET)
-	public ModelAndView superLogin() {
+	public ModelAndView superAdminLogin() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
 		ModelAndView model = new ModelAndView();
